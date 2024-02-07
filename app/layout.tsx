@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import { LayoutProps } from "@/lib/@types/props";
+import { Header } from "@/ui/header";
+import { Footer } from "@/ui/footer";
 import "@/ui/globals.css";
 
 const ubuntu = Ubuntu({
@@ -38,7 +40,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        {children}
+        <div className="bg-magnolia">
+          <Header />
+          <div className="h-full">
+            <main className="w-11/12 mx-auto pt-10 pb-8 px-6 rounded-xl -translate-y-[10%] shadow-form bg-white">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </div>
       </body>
     </html>
   );
