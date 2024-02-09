@@ -11,7 +11,7 @@ const colorVariant: Variant<string> = {
     "blue-300": "text-white border-blue-300 bg-blue-300"
 }
 
-const Input = ({ className, type = "text", value, size, color, id, name, placeholder, required, disabled = false, onClick, onChange }: InputProps) => {
+const Input = ({ className, type = "text", value, size, color, id, name, placeholder, required, disabled = false, checked = false, onClick, onChange }: InputProps) => {
 
     const classList = merge(sizeVariant[size], colorVariant[color ?? ""], className)
 
@@ -23,7 +23,8 @@ const Input = ({ className, type = "text", value, size, color, id, name, placeho
             id={id}
             name={name}
             required={required}
-            disabled={disabled}
+            disabled={disabled}                                           
+            checked={checked}
             placeholder={placeholder}
             onClick={onClick}
             onChange={onChange}

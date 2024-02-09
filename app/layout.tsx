@@ -3,6 +3,7 @@ import { Ubuntu } from "next/font/google";
 import { LayoutProps } from "@/lib/@types/props";
 import { Header } from "@/ui/header";
 import { Footer } from "@/ui/footer";
+import { FormProvider } from "@/context/form-context";
 import "@/ui/globals.css";
 
 const ubuntu = Ubuntu({
@@ -40,14 +41,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        <div className="bg-magnolia">
+        <div className="min-h-screen bg-magnolia">
           <Header />
-          <div className="h-full">
-            <main className="w-11/12 mx-auto pt-10 pb-8 px-6 rounded-xl -translate-y-[10%] shadow-form bg-white">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <FormProvider>
+            <div>
+              <main className="w-11/12 mx-auto 
+                    pt-10 pb-8 px-6 relative rounded-xl -translate-y-[8%] shadow-form bg-white">
+                {children}
+              </main>
+            </div>
+          </FormProvider>
+          <Footer />
         </div>
       </body>
     </html>

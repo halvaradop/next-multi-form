@@ -1,3 +1,4 @@
+"use client"
 import { createPortal } from "react-dom"
 import { ReactPortal, useEffect, useRef, useState } from "react"
 import { PortalProps } from "@/lib/@types/props"

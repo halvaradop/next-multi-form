@@ -1,17 +1,24 @@
 "use client"
 import { useRouter } from "next/navigation"
-import { ChangeEvent, FormEvent, useId, useState } from "react"
+import { ChangeEvent, useId, useState } from "react"
 import { User } from "@/lib/@types/types"
 import { Input } from "@/ui/custom/input"
 import { Portal } from "@/ui/custom/portal"
+import { Button } from "@/ui/custom/button"
+import { useAccessForm } from "@/hooks/use-access-form"
+import { useLocalStorage } from "@/hooks/use-localstorage"
 
 const PersonalPage = () => {
     const keyId = useId()
     const router = useRouter()
+    const { provider: { personal }, dispatch } = useAccessForm()
+    const [storage] = useLocalStorage("key")
+    
+
     const [form, setForm] = useState<User>({
-        name: "",
-        email: "",
-        phone: ""
+        name: personal.name ?? "",
+        email: personal.email ?? "",
+        phone: personal.phone ?? ""
     })
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +29,12 @@ const PersonalPage = () => {
         })
     }
 
-    const handleSubmit = (event: FormEvent<HTMLInputElement>) => {
+    const handleSubmit = () => {
         router.push("/plan")
+        dispatch(previous => ({
+            ...previous,
+            personal: form
+        }))
     }
 
     return (
@@ -45,10 +56,10 @@ const PersonalPage = () => {
                     Phone Number
                     <Input className="w-full mt-1" type="number" size="md" color="gray" value={form.phone} name="phone" id={`${keyId}-phone`} placeholder="e.g. +1 234 567 890" onChange={handleChange} />
                 </label>
-                <Portal selector="body div #footer">
-                    <Input className="px-4 ml-auto indent-0 hover:cursor-pointer" type="submit" size="md" color="blue-300" value="Next Step" onClick={handleSubmit} />
-                </Portal>
             </form>
+            <Portal selector="body div #footer">
+                <Button className="px-4 ml-auto indent-0 hover:cursor-pointer" type="submit" size="md" color="blue-300" onClick={handleSubmit}>Next Step</Button>
+            </Portal>
         </>
     )
 }

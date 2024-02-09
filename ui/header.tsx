@@ -6,10 +6,10 @@ import patternDesktop from "@/public/sidebar-desktop.svg"
 const Header = () => {
 
     return (
-        <header className="w-full h-[clamp(150px,_30vw,_30vh)] relative overflow-hidden">
+        <header className="w-full h-full flex items-center justify-center relative overflow-hidden">
             <HeaderSteps />
             <picture>
-                <Image className="absolute top-0 left-0" width={800} src={patternMobile} alt="pattern version mobile" priority />
+                <Image width={900} height={300} src={patternMobile} alt="pattern version mobile" priority />
             </picture>
         </header>
     )
